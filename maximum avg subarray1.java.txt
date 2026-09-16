@@ -1,0 +1,32 @@
+class Solution {
+    public double findMaxAverage(int[] nums, int k) {
+
+        int sum = 0;
+
+        // 1. Calculate sum of first k elements
+        for (int i = 0; i < k; i++) {
+            sum += nums[i];
+        }
+
+        // 2. First window is initially the maximum
+        int maxSum = sum;
+
+        // 3. Slide the window
+        for (int i = k; i < nums.length; i++) {
+
+            // Add the new element
+            sum += nums[i];
+
+            // Remove the old element
+            sum -= nums[i - k];
+
+            // Update maximum sum
+            if (sum > maxSum) {
+                maxSum = sum;
+            }
+        }
+
+        // 4. Convert maximum sum into average
+        return (double) maxSum / k;
+    }
+}
